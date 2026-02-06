@@ -21,19 +21,19 @@ public class ReviseDianFeiApplication {
     public CommandLineRunner run(ZhifuService zhifuService, HuikuanService huikuanService, BeizhuService beizhuService) {
         return (args) -> {
             System.out.println("开始处理数据...");
-            
+
             // 步骤1：生成需输入的电费支付数据格式文件
             List<BeizhuData> beizhuDataList = zhifuService.neededBeizhuData().getBeizhuDataList();
             System.out.println("支付数据格式生成成功！");
             System.out.println("生成的支付数据条数：" + beizhuDataList.size());
-            
+
             // 步骤2：读取回款数据
             List<HuikuanData> huikuanDataList = huikuanService.neededHuikuanData().getHuikuanDataList();
             System.out.println("回款数据读取成功！");
             System.out.println("读取的回款数据条数：" + huikuanDataList.size());
-            
+
             // 步骤3：直接使用内存中的数据生成最终文件（无需手动填写）
-            List<BeizhuData> finalDataList = beizhuService.finalData(huikuanDataList).getBeizhuDataList();
+            List<BeizhuData> finalDataList = beizhuService.finalDataFromMemory(huikuanDataList, beizhuDataList).getBeizhuDataList();
             System.out.println("最终文件生成成功！");
             System.out.println("处理完成！");
             System.out.println("\n生成的文件：");

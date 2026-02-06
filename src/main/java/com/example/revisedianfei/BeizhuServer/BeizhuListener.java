@@ -111,11 +111,12 @@ public class BeizhuListener extends AnalysisEventListener<BeizhuData> {
         // 处理匹配的回款记录
         processMatchedRecords(beizhuData, matchedHuikuans);
 
+        // 所有记录都添加到beizhuDataList中，确保"支付备注数据"sheet中包含所有数据
         this.beizhuDataList.add(beizhuData);
         System.out.println("过程中处理数据条数：" + this.beizhuDataList.size());
     }
 
-    /**
+ /**
      * 处理匹配的回款记录
      */
     private void processMatchedRecords(BeizhuData beizhuData, List<HuikuanData> matchedHuikuans) {
